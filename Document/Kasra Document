@@ -1,0 +1,14 @@
+url:/forgetPasswordBy/phonenumber
+khob in url ro vaghty bezani ye UserJsonModelForget azat mikhad ba  in json phonenumber ro migire va bad to db
+peydash mikone,peyda kardanasham ba findByphonenumber has ke to repository jadid tarif kardim badam ke peydash kard
+ye verification misaze bad ba sms e kavenegar mifreese vasash bad on verification ro to db e user mikhaboone ta user
+vared kone
+
+url:/forgetPasswordBy/phonenumber/verify/{id}
+in url miad veification ke karbar vasash sms shode ro vared mikone be sorate json
+bad chek mikone ke verification ba oni ke to db has chek mikone agar ok bashe ke mifrese be pagy ke passwordesh ro avaz kone
+agarm na ke baresh migardone be hamoon url ke dobare code ro bezane
+hala {id} chie?in id user has ke to url e qabli peydash karde hala ba redirect mifrese ke bedoone kodom user ro bayad
+check kone vase verification.
+badam ke shoro mikone be avaz kardane password o hashesh mikone bad mikhaboone to db
+
