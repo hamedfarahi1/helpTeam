@@ -492,7 +492,7 @@ public class AuthController extends Functions {
                 }
                 Collections.shuffle(questions);
 
-                jsonObject.put("questoin1",questions.get(0));
+                jsonObject.put("question1",questions.get(0));
                 jsonObject.put("question2",questions.get(1));
                 jsonObject.put("question3",questions.get(2));
                 return ResponseEntity.ok(jsonObject.toString());
