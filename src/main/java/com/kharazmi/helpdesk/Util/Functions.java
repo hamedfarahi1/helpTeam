@@ -153,7 +153,7 @@ public class Functions {
 
         SendMail(adminEmail,"example@gmail.com",Subject,"you have a ticket");
 
-        return "";
+        return "true";
 
     }
 }
