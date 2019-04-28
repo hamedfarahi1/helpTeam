@@ -1,11 +1,13 @@
 package com.kharazmi.helpdesk.Controller;
 
+import com.auth0.jwt.JWT;
 import com.kharazmi.helpdesk.Model.*;
 import com.kharazmi.helpdesk.Repository.*;
 import com.kharazmi.helpdesk.Service.EmailSenderService;
 import com.kharazmi.helpdesk.Service.EmailService;
 import com.kharazmi.helpdesk.Util.*;
 import com.kharazmi.helpdesk.kavenegar.sdk.KavenegarApi;
+import io.jsonwebtoken.JwtParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
@@ -392,7 +394,7 @@ public class AuthController extends Functions {
         }
     }
 
-    /*kasra code*****/
+    /*kasra code*/
     @RequestMapping(method = RequestMethod.GET,value = "/forgetPasswordBy/phonenumber")
     public JsonModelResponse forgetpasswordbyphonenumber(@RequestBody UserJsonModelForget userJsonModelForget) {
         UserModel userModel = userModelRepository.findByPhoneNumber(userJsonModelForget.getPhoneNumber());
@@ -449,12 +451,14 @@ public class AuthController extends Functions {
         }
     }
 
+
     //hamed farahi codes:
 
 
     @RequestMapping(value = "/register/verify", method = RequestMethod.POST)
     public ResponseEntity<String> GetPhoneNumberAndVerify(@RequestBody UserJsonModelForget userJsonModelForget) throws JSONException {
         String phoneNumber = userJsonModelForget.getPhoneNumber();
+
         if (verifyphonenumberModelRepository.findPhoneNumber(phoneNumber) != null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(getJsonResponse( "this phone number already exist").toString());
         } else {
@@ -525,6 +529,22 @@ public class AuthController extends Functions {
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(getJsonResponse( "your input is not valid").toString());
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //    @RequestMapping(method = RequestMethod.POST,value="/forgetPasswordBy/phonenumber/ChangePassword/{id}")

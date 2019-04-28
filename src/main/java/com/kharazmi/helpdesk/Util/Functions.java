@@ -3,6 +3,7 @@ package com.kharazmi.helpdesk.Util;
 import com.kharazmi.helpdesk.Model.RoleModel;
 import com.kharazmi.helpdesk.Model.UserModel;
 import com.kharazmi.helpdesk.Model.VerifyphonenumberModel;
+import com.kharazmi.helpdesk.Repository.AdminModelRepository;
 import com.kharazmi.helpdesk.Repository.RoleModelRepository;
 import com.kharazmi.helpdesk.Repository.UserModelRepository;
 import com.kharazmi.helpdesk.Service.EmailSenderService;
@@ -17,6 +18,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.providers.encoding.Md5PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.management.StandardEmitterMBean;
+import javax.security.auth.Subject;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.util.Base64;
@@ -33,6 +36,8 @@ public class Functions {
     EmailSenderService emailSenderService;
     @Autowired
     UserModelRepository userModelRepository;
+    @Autowired
+    AdminModelRepository adminModelRepository;
 
     public int random() {
         Random r = new Random( System.currentTimeMillis() );
@@ -136,5 +141,19 @@ public class Functions {
         userModel.setLastLogin(new Timestamp(System.currentTimeMillis()));
 
         return userModel;
+    }
+
+    public String sendEmailToOfflineAdmin(JSONObject jsonObject) throws JSONException {
+
+        String adminEmail=adminModelRepository.getOne(Integer.parseInt(jsonObject.getString("adminId"))).getEmail();
+        String adminName=adminModelRepository.getOne(Integer.parseInt(jsonObject.getString("adminId"))).getFirstName();
+        String userName=adminModelRepository.getOne(Integer.parseInt(jsonObject.getString("adminId"))).getFirstName()
+                        +"   "+adminModelRepository.getOne(Integer.parseInt(jsonObject.getString("adminId"))).getFamilyName();
+        String Subject="Offline Admin";
+
+        SendMail(adminEmail,"example@gmail.com",Subject,"you have a ticket");
+
+        return "";
+
     }
 }
